@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Happy Birthday 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Chewy&family=Lora:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--red:#d8392f;--cream:#f7ecdc;--pink:#e0607e}
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;overflow:hidden;background:var(--cream);font-family:'Amatic SC',cursive}
+.side{position:fixed;top:0;bottom:0;width:min(7vw,60px);z-index:5;background:repeating-conic-gradient(#e0483f 0 25%,#f7e9d2 0 50%) 0 0/34px 34px}
+.side.l{left:0}.side.r{right:0}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5vh;padding:4vh 9vw;opacity:0;pointer-events:none;transition:opacity .7s;text-align:center}
+.slide.on{opacity:1;pointer-events:auto}
+h2{font-size:clamp(30px,6vw,64px);color:#c9505f;letter-spacing:1px;line-height:1}
+.btn{font-family:'Chewy',cursive;background:var(--red);color:#fff;border:0;border-radius:40px;padding:.5em 1.5em;font-size:clamp(16px,2.6vw,26px);cursor:pointer;box-shadow:0 4px 0 #9d231c;transition:transform .15s;z-index:3}
+.btn:hover{transform:scale(1.08)}.btn:active{transform:translateY(3px)}
+.row{display:flex;flex-wrap:wrap;gap:2vh 6vw;justify-content:center;align-items:center;z-index:2}
+.bub{background:var(--red);color:#fff;border-radius:50px 50px 8px 50px;padding:2vh 5vw;font-family:'Chewy';box-shadow:0 5px 0 #9d231c}
+.bub b{display:block;font-size:clamp(34px,7vw,74px);font-weight:400}.bub small{font-size:clamp(12px,1.8vw,18px)}
+.cat{position:absolute;width:min(26vw,32vh);filter:drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 5px 6px #0003);animation:bob 3s ease-in-out infinite;z-index:1}
+.cat svg{width:100%;display:block}
+@keyframes bob{50%{transform:translateY(-8px) rotate(2deg)}}
+.gift{width:min(22vw,24vh);animation:bob 2s infinite;z-index:2}
+.photo{width:min(44vw,42vh);aspect-ratio:4/3;object-fit:cover;border:5px solid #ef5b4f;border-radius:6px;box-shadow:0 6px 18px #0003;z-index:2;background:#fff}
+.pol{background:#fff;padding:8px 8px 22px;box-shadow:0 6px 16px #0003;transform:rotate(-2deg)}.pol img{width:min(24vw,30vh);aspect-ratio:1;object-fit:cover;display:block}
+.paper{background:linear-gradient(135deg,#f5cc7e,#e6a940);font-family:Lora,serif;font-size:clamp(9px,1.45vw,15px);line-height:1.5;color:#4b3315;padding:3vh 2.4vw;width:min(36vw,86vw);max-height:62vh;overflow:auto;text-align:center;box-shadow:inset 0 0 30px #8a5a1a66,0 6px 16px #0003;border-radius:4px;z-index:2}
+.hearts{color:#d65a82;letter-spacing:6px;font-size:14px;margin-bottom:6px}
+.frame{padding:12px;border:3px dashed #ef6a77;border-radius:12px;position:relative;z-index:2;background:#fff8}.frame .photo{border:0;width:min(34vh,42vw);aspect-ratio:958/1598;border-radius:4px}
+#hb{gap:1.5vh;padding-top:2vh;padding-bottom:2vh}
+.fl{position:fixed;bottom:-30px;z-index:4;pointer-events:none;animation:up linear forwards}
+@keyframes up{to{transform:translateY(-115vh) rotate(40deg);opacity:0}}
+.msg{background:linear-gradient(135deg,#fff7ea,#f9e3c8);border:3px solid #e9b8a8;border-radius:14px;padding:4vh 4vw;width:min(92vw,720px);max-height:78vh;overflow:auto;box-shadow:0 8px 24px #0003;z-index:2;font-family:Lora,serif;color:#5a3a2e;font-size:clamp(13px,2vw,19px);line-height:1.7}
+.msg p{opacity:0;transform:translateY(12px);transition:opacity 1.2s,transform 1.2s;margin-bottom:1.1em}.msg p.show{opacity:1;transform:none}
+.msg .to{font-family:'Amatic SC';font-size:clamp(30px,5vw,50px);color:#c9505f}
+.msg .fin{font-family:'Amatic SC';font-size:clamp(24px,4.2vw,42px);line-height:1.15;color:#d03a55;margin:1.4em 0 0}
+.mus{position:fixed;bottom:14px;right:calc(min(7vw,60px) + 12px);z-index:30;font-size:20px;padding:.35em .65em;border-radius:50%}
+.small{font-size:clamp(15px,2vw,22px)!important}
+</style>
+</head>
+<body>
+<audio id="bgm" src="music.mp3" loop preload="auto"></audio>
+<button class="btn mus" id="mus" title="Music on/off">🔇</button>
+<div class="side l"></div><div class="side r"></div>
+
+<!-- 1: Hello -->
+<section class="slide on">
+  <div class="bub"><b id="t-hello"></b><small id="t-sub"></small></div>
+  <svg class="gift" viewBox="0 0 120 130"><path d="M60 38C40 8 18 14 30 34zM60 38C80 8 102 14 90 34z" fill="#ef4a2f"/><circle cx="60" cy="38" r="8" fill="#d8392f"/><rect x="14" y="40" width="92" height="20" fill="#f6b9c0"/><rect x="20" y="60" width="80" height="66" fill="#f4b6bf"/><path d="M60 112C36 94 44 76 60 88 76 76 84 94 60 112z" fill="#ef3b2d"/></svg>
+  <button class="btn" data-next>Click To Open</button>
+  <div class="cat" style="left:1%;bottom:0" data-c='{"f":"#f3f3f3","blaze":1,"glasses":1}'></div>
+  <div class="cat" style="right:1%;bottom:0" data-c='{"f":"#f2b36c","bow":1,"flowers":1}'></div>
+</section>
+
+<!-- 2: Ready -->
+<section class="slide">
+  <h2>Are You Ready For A Little Surprise??</h2>
+  <div class="row"><button class="btn" data-next>Yes 🧸</button><button class="btn" data-next>Of Course 🐑</button></div>
+  <button class="btn" data-next>Definitely 🐱</button>
+  <div class="cat" style="left:2%;top:4%" data-c='{"f":"#e8e0d6","cap":1,"flowers":1}'></div>
+  <div class="cat" style="right:2%;bottom:0" data-c='{"f":"#f1cfa6","blush":1,"big":1}'></div>
+</section>
+
+<!-- 3: How much -->
+<section class="slide">
+  <div class="cat" style="position:relative;width:min(16vw,20vh)" data-c='{"f":"#f2c58e","big":1,"blush":1}'></div>
+  <h2 style="font-size:clamp(26px,5vw,52px)">Do you know how much I love you ??</h2>
+  <div class="row"><button class="btn" data-next>VERY ⭐</button><button class="btn" data-next>A LOTT 🌟</button></div>
+  <button class="btn" data-next>INFINITE 💙</button>
+</section>
+
+<!-- 4: Love most -->
+<section class="slide">
+  <h2>You know what I love the most?</h2>
+  <button class="btn" data-next>Click to know!</button>
+  <div class="cat" style="left:1%;bottom:0" data-c='{"f":"#fafafa","blush":1,"big":1}'></div>
+  <div class="cat" style="right:3%;bottom:0" data-c='{"f":"#e9983f","big":1,"blush":1}'></div>
+</section>
+
+<!-- 5: Smile -->
+<section class="slide">
+  <h2>Your beautiful smile !</h2>
+  <div class="row">
+    <div class="cat" style="position:relative;width:min(22vw,26vh)" data-c='{"f":"#e0903a","grumpy":1,"paw":1}'></div>
+    <img class="photo" data-p="photo1.jpg" alt="">
+  </div>
+  <button class="btn" data-next>Next</button>
+</section>
+
+<!-- 6: Letter -->
+<section class="slide">
+  <div class="row" style="align-items:flex-start;gap:3vh 4vw">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:2vh">
+      <h2 id="t-feel" style="font-size:clamp(26px,5vw,54px)"></h2>
+      <div class="pol"><img data-p="photo2.jpg" alt=""></div>
+      <div style="display:flex;align-items:center;gap:10px"><span style="font-size:34px">🎀</span><button class="btn" data-next>click me</button></div>
+    </div>
+    <div class="paper"><div class="hearts">♥ ♥ ♥ ♥ ♥</div><div id="letter"></div></div>
+  </div>
+</section>
+
+<!-- 7: Happy Birthday (last) -->
+<section class="slide" id="hb">
+  <div style="display:flex;align-items:center;gap:2vw"><span style="font-size:6vmin;color:#e0607e">♥♥</span><h2 id="t-hb" style="font-size:clamp(34px,6vw,68px)"></h2></div>
+  <div class="row">
+    <div class="frame"><img class="photo" data-p="photo3.jpg" alt=""></div>
+    <div class="cat" style="position:relative;width:min(24vw,30vh)" data-c='{"f":"#f3c9a0","party":1,"blush":1,"flowers":1}'></div>
+  </div>
+  <button class="btn small" data-next>One last thing 💌</button>
+</section>
+
+<!-- 8: Romantic message (last) -->
+<section class="slide" id="fin">
+  <div class="msg" id="msg"></div>
+</section>
+
+<script>
+/* ======== EDIT YAHAN SE ======== */
+const CFG={
+  name:"Florencia",
+  hello:"Hello Cutie!", sub:"I made this especially for you ♥",
+  feel:"How I feel for you!",
+  hb:"Happy Birthday",
+  letter:"Loving you feels like finding a place where my heart can finally rest. You're not just my partner, you're my comfort, my safe space, and the person I want to share all the little and big moments of life with. Even with all the miles between us, I love the way you make ordinary days feel special just by being there. With you, I can be completely myself without pretending or hiding anything. I hope you know that my love for you is in every little thing — the way I think about you, the way I smile when I hear your name. Happy birthday, mi amor. 💕",
+  msg:[
+   ["to","My Florii,"],
+   ["p","Some people walk into your life and quietly rearrange everything. You did that to me. Before you, I was just getting through the days. Now I look forward to them, because somewhere in every single one of them, there is you."],
+   ["p","Distance tried to make us small, but all it ever did was show me how big this love really is. Every call, every good morning, every silly voice note is a tiny bridge, and I would build each one again a thousand times just to reach you."],
+   ["p","You are my calm on loud days, my laughter on tired ones, my favourite notification and my favourite thought. When I imagine my future, you are already in every picture, smiling at me like it's the easiest thing in the world."],
+   ["p","Today the world got you, and I will be grateful for that for the rest of my life. Whatever this year brings, I'll hold your hand through all of it, near or far, always. Te quiero más de lo que las palabras alcanzan."],
+   ["fin","you came in my life to make it better and now i want you forever florii, i love infinite mi vida, HAPPY 26th BIRTHDAY MY ELF 💖"]
+  ]
+};
+/* =============================== */
+const PH='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f9d3da"/><text x="200" y="150" font-size="70" text-anchor="middle">💕</text><text x="200" y="215" font-size="18" text-anchor="middle" fill="#a33" font-family="sans-serif">photo yaha aayegi</text></svg>');
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+$('#t-hello').textContent=CFG.hello;$('#t-sub').textContent=CFG.sub;$('#t-feel').textContent=CFG.feel;
+$('#t-hb').textContent=CFG.hb+" "+CFG.name;$('#letter').textContent=CFG.letter;
+$$('img[data-p]').forEach(i=>{i.onerror=()=>{i.onerror=null;i.src=PH};i.src=i.dataset.p});
+
+/* cartoon cats (SVG) — chahe to apne PNG stickers se replace kar sakte ho */
+function cat(o){const f=o.f;let s='<svg viewBox="0 0 200 190">';
+ s+=`<path d="M38 80L52 18L98 56ZM162 80L148 18L102 56Z" fill="${f}"/><path d="M54 62L58 38L78 54ZM146 62L142 38L122 54Z" fill="#f7b6bd"/><ellipse cx="100" cy="112" rx="72" ry="62" fill="${f}"/>`;
+ if(o.blaze)s+='<path d="M100 52Q86 80 100 104Q114 80 100 52Z" fill="#e9a35a"/>';
+ s+='<ellipse cx="100" cy="138" rx="34" ry="24" fill="#fff"/>';
+ if(o.grumpy)s+='<ellipse cx="70" cy="108" rx="13" ry="11" fill="#c8d84a"/><ellipse cx="130" cy="108" rx="13" ry="11" fill="#c8d84a"/><rect x="68" y="98" width="4" height="20" rx="2" fill="#222"/><rect x="128" y="98" width="4" height="20" rx="2" fill="#222"/><path d="M52 90L86 100L86 92ZM148 90L114 100L114 92Z" fill="#5a3410"/>';
+ else{const r=o.big?15:10;s+=`<circle cx="70" cy="108" r="${r}" fill="#222"/><circle cx="130" cy="108" r="${r}" fill="#222"/><circle cx="${74}" cy="${103}" r="${r/3}" fill="#fff"/><circle cx="134" cy="103" r="${r/3}" fill="#fff"/>`}
+ if(o.glasses)s+='<rect x="46" y="94" width="44" height="28" rx="11" fill="#1d1d24"/><rect x="110" y="94" width="44" height="28" rx="11" fill="#1d1d24"/><path d="M90 102h20" stroke="#1d1d24" stroke-width="4"/>';
+ s+='<path d="M94 126h12l-6 7z" fill="#f08a96"/><path d="M100 133q-7 10-15 3M100 133q7 10 15 3" stroke="#555" fill="none" stroke-width="2.5" stroke-linecap="round"/><path d="M30 120l30 6M30 134l30-2M170 120l-30 6M170 134l-30-2" stroke="#999" stroke-width="2"/>';
+ if(o.blush)s+='<ellipse cx="46" cy="130" rx="14" ry="9" fill="#ff7b9c" opacity=".6"/><ellipse cx="154" cy="130" rx="14" ry="9" fill="#ff7b9c" opacity=".6"/>';
+ if(o.cap)s+='<path d="M40 84Q100 -14 160 84Z" fill="#8e2437"/><path d="M128 82h50" stroke="#8e2437" stroke-width="10" stroke-linecap="round"/>';
+ if(o.party)s+='<path d="M68 70L106 -2L140 66Z" fill="#f48fb1"/><circle cx="106" cy="0" r="9" fill="#fff"/>';
+ if(o.bow)s+='<path d="M142 56l28-16v32zM142 56l-28-16v32z" fill="#f48fb1"/><circle cx="142" cy="56" r="6" fill="#e0558a"/>';
+ if(o.flowers)s+='<path d="M70 150L135 150L102 188Z" fill="#fde3e8"/><g fill="#f27b9a"><ellipse cx="82" cy="140" rx="12" ry="18"/><ellipse cx="102" cy="134" rx="12" ry="19"/><ellipse cx="122" cy="141" rx="12" ry="18"/></g>';
+ if(o.paw)s+='<ellipse cx="44" cy="165" rx="30" ry="18" fill="#fff"/><path d="M60 165h-26M54 156v18" stroke="#ddd" stroke-width="2"/>';
+ return s+'</svg>'}
+$$('[data-c]').forEach(e=>e.innerHTML=cat(JSON.parse(e.dataset.c)));
+
+/* navigation */
+const S=$$('.slide');let n=0;
+function go(i){if(!asked){asked=true;musicOn()}S[n].classList.remove('on');n=Math.min(i,S.length-1);S[n].classList.add('on');
+ if(S[n].id==='hb')burst();if(S[n].id==='fin'){burst();reveal()}}
+$$('[data-next]').forEach(b=>b.onclick=()=>go(n+1));
+
+/* floating hearts */
+function fl(e){const d=document.createElement('div');d.className='fl';d.textContent=e;
+ d.style.left=Math.random()*100+'vw';d.style.fontSize=14+Math.random()*26+'px';d.style.animationDuration=5+Math.random()*5+'s';
+ document.body.appendChild(d);setTimeout(()=>d.remove(),10500)}
+setInterval(()=>fl(['💗','💕','🌸'][Math.random()*3|0]),1100);
+function burst(){for(let i=0;i<30;i++)setTimeout(()=>fl(['🎉','🎈','💖','✨','🎂'][Math.random()*5|0]),i*120)}
+
+/* romantic message, line by line */
+let shown=false;
+function reveal(){if(shown)return;shown=true;const box=$('#msg');
+ CFG.msg.forEach(([c,t],i)=>{const p=document.createElement('p');p.className=c;p.textContent=t;box.appendChild(p);
+  setTimeout(()=>{p.classList.add('show');p.scrollIntoView({behavior:'smooth',block:'nearest'})},800+i*3200)});
+ setTimeout(burst,800+CFG.msg.length*3200-2000)}
+/* background music: apna gaana music.mp3 naam se isi folder me rakh do */
+const A=$('#bgm'),B=$('#mus');let on=false,asked=false;
+A.volume=.4;
+const setBtn=()=>B.textContent=on?'🔊':'🔇';
+async function musicOn(){try{await A.play();on=true}catch(e){on=false}setBtn()}
+function musicOff(){on=false;A.pause();setBtn()}
+B.onclick=()=>on?musicOff():musicOn();
+B.style.display='none';
+A.addEventListener('loadedmetadata',()=>{B.style.display='block'});
+</script>
+</body>
+</html>
